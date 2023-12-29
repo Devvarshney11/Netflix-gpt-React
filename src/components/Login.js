@@ -2,11 +2,11 @@ import { useState, useRef } from "react";
 import { formValidation } from "../utils/Validate";
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword ,signInWithEmailAndPassword ,updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleSignIn = () => {
     setIsSignedIn(!isSignedIn);
   };
@@ -28,7 +28,7 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           localStorage.setItem("user", JSON.stringify(user.uid));
-          navigate("/browse");
+          window.location.replace("/browse");
         })
         .catch((error) => {
           const errorMessage = error.message;
