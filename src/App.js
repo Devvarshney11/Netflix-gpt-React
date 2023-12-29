@@ -9,15 +9,16 @@ import { auth } from "./utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser ,removeUser} from "./utils/userSlice";
 import { Navigate } from "react-router-dom";
+
 const uid = localStorage.getItem("user");
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element:(uid === "null")?<Login />:<Navigate to="/browse"/>,
+    element:(uid === null)?<Login />:<Navigate to="/browse"/>,
   },
   {
     path: "/browse",
-    element:(uid === "null")?<Navigate to="/"/>:<Body />,
+    element:(uid === null)?<Navigate to="/"/>:<Body />,
   },
 ]);
 const App = () => {

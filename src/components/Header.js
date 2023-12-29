@@ -6,7 +6,7 @@ const Header = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        localStorage.setItem("user", "null");
+        localStorage.setItem("user", null);
         window.location.replace("/");
       })
       .catch((error) => {});
