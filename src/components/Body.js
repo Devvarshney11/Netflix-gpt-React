@@ -1,8 +1,14 @@
+import Header from "./Header";
 
 const Body = () => {
   return (
-    <div>Body</div>
-  )
-}
+    <div>
+      <Header />
+      <div>
+        Body
+      </div>
+    </div>
+  );
+};
 
-export default Body
+export default Body;

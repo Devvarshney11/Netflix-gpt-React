@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { formValidation } from "../utils/Validate";
 import { auth } from "../utils/firebase";
 import { createUserWithEmailAndPassword ,signInWithEmailAndPassword ,updateProfile } from "firebase/auth";
+import Header from "./Header";
 const Login = () => {
   const [isSignedIn, setIsSignedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -24,9 +25,6 @@ const Login = () => {
         password.current.value
       )
         .then((userCredential) => {
-          const user = userCredential.user;
-          localStorage.setItem("user", JSON.stringify(user.uid));
-          window.location.replace("/browse");
         })
         .catch((error) => {
           const errorMessage = error.message;
@@ -57,6 +55,7 @@ const Login = () => {
   };
   return (
     <div>
+      <Header/>
       <div className="absolute">
         <img
           src="https://assets.nflxext.com/ffe/siteui/vlv3/563192ea-ac0e-4906-a865-ba9899ffafad/6b2842d1-2339-4f08-84f6-148e9fcbe01b/IN-en-20231218-popsignuptwoweeks-perspective_alpha_website_medium.jpg"

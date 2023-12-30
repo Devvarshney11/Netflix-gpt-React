@@ -1,17 +1,33 @@
-// import { useSelector } from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser, removeUser } from "../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = auth.currentUser;
+        dispatch(addUser({uid:uid,email:email,displayName:displayName}));
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+  }, []);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        localStorage.removeItem("user");
-        window.location.replace("/");
       })
       .catch((error) => {});
   };
-  const user = localStorage.getItem("user");
+  const user = useSelector((state) => state.user.user);
   return (
     <div className="h-[90px] bg-gradient-to-b from-black via-black to-transparent absolute z-50 w-[100%] flex justify-between items-center">
       <img
