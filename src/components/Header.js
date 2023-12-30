@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
@@ -6,12 +6,12 @@ const Header = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        localStorage.setItem("user", null);
+        localStorage.removeItem("user");
         window.location.replace("/");
       })
       .catch((error) => {});
   };
-  const user = useSelector((state) => state.user.user);
+  const user = localStorage.getItem("user");
   return (
     <div className="h-[90px] bg-gradient-to-b from-black via-black to-transparent absolute z-50 w-[100%] flex justify-between items-center">
       <img
